@@ -1,5 +1,7 @@
 # Ansible + AWS SSM Bootstrap (No SSH)
 
+![Architecture Diagram](images/diagram-Ansible.png)
+
 This project demonstrates a secure, production-style approach to provisioning and bootstrapping EC2 instances **without SSH**, using modern AWS-native access patterns and automation best practices.
 
 Infrastructure is provisioned with Terraform, while configuration and hardening are performed with Ansible over **AWS Systems Manager (SSM)**. Observability is enabled via the CloudWatch Agent, shipping logs and metrics without opening inbound management ports.
