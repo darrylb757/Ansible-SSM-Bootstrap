@@ -1,0 +1,11 @@
+profile: basic
+offline: true
+
+exclude_paths:
+  - .terraform/
+  - .ansible/
+  - terraform/
+
+
+skip_list:
+  - fqcn-builtins  # optional: enable later when I want everything fully qualified

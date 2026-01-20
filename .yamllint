@@ -1,0 +1,22 @@
+extends: default
+
+ignore: |
+  .terraform/
+  .ansible/
+  terraform.tfstate
+  terraform.tfstate.backup
+
+rules:
+  document-start: disable
+
+  line-length:
+    max: 140
+    level: warning
+
+  truthy:
+    allowed-values: ["true", "false", "on"]
+    check-keys: true
+
+  indentation:
+    spaces: 2
+    indent-sequences: consistent

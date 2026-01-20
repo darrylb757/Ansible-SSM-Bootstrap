@@ -1,0 +1,53 @@
+- name: Install security baseline packages
+  ansible.builtin.apt:
+    name:
+      - ufw
+      - unattended-upgrades
+      - fail2ban
+    state: present
+    update_cache: true
+
+# UFW: default deny inbound, allow outbound
+- name: Set UFW default policies
+  community.general.ufw:
+    direction: "{{ item.direction }}"
+    policy: "{{ item.policy }}"
+  loop:
+    - direction: incoming
+      policy: deny
+    - direction: outgoing
+      policy: allow
+
+
+- name: Allow HTTP
+  community.general.ufw:
+    rule: allow
+    port: "80"
+    proto: tcp
+
+- name: Allow HTTPS (future-proof)
+  community.general.ufw:
+    rule: allow
+    port: "443"
+    proto: tcp
+
+# intentionally do NOT allow SSH (22)
+- name: Enable UFW
+  community.general.ufw:
+    state: enabled
+
+- name: Ensure unattended upgrades are enabled
+  ansible.builtin.copy:
+    dest: /etc/apt/apt.conf.d/20auto-upgrades
+    owner: root
+    group: root
+    mode: "0644"
+    content: |
+      APT::Periodic::Update-Package-Lists "1";
+      APT::Periodic::Unattended-Upgrade "1";
+
+- name: Ensure fail2ban is enabled and running
+  ansible.builtin.service:
+    name: fail2ban
+    state: started
+    enabled: true

@@ -1,0 +1,35 @@
+# =========================
+# Terraform
+# =========================
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+terraform.tfvars
+terraform.tfvars.json
+
+# =========================
+# Ansible
+# =========================
+.ansible/
+*.retry
+*.log
+inventory/*.cache
+inventory/*.json
+
+# =========================
+# Python / tooling
+# =========================
+__pycache__/
+*.pyc
+venv/
+.env
+
+# =========================
+# OS / Editor
+# =========================
+.DS_Store
+.idea/
+.vscode/
+
+
